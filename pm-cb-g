@@ -63,7 +63,8 @@ use constant {
 
 use constant TITLE => 'PM::CB::G';
 
-gui();
+my $gui_t = $worker_class->create(\&gui);
+sleep 1 while 1;
 
 
 sub communicate {
@@ -258,10 +259,12 @@ sub gui {
     $mw->optionAdd('*font', "$font_name $char_size");
 
     my $read_f = $mw->Frame->pack(-expand => 1, -fill => 'both');
+    print STDERR "A\n";
     my $read   = $read_f->ROText(-background => $bg_color,
                                  -foreground => $fg_color,
                                  -wrap       => 'word')
         ->pack(-expand => 1, -fill => 'both');
+    print STDERR "B\n";
     $read->tagConfigure(author  => -foreground => $author_color);
     $read->tagConfigure(private => -foreground => $private_color);
     $read->tagConfigure(seen    => -foreground => $seen_color);
